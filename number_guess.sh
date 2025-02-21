@@ -32,8 +32,6 @@ SECRET_NUMBER=$(( RANDOM % 1000 + 1 ))
 echo "Guess the secret number between 1 and 1000:"
 
 GUESS_COUNT=0
-LOWER_BOUND=1
-UPPER_BOUND=1000
 
 while true; do
   read GUESS
@@ -56,18 +54,8 @@ while true; do
     fi
     break
   elif [[ $GUESS -gt $SECRET_NUMBER ]]; then
-    UPPER_BOUND=$GUESS
-    if [[ $((GUESS - SECRET_NUMBER)) -le 10 ]]; then
-      echo "You're very close! Try a slightly lower number:"
-    else
-      echo "It's lower than that, guess again (Try between $LOWER_BOUND and $UPPER_BOUND):"
-    fi
+    echo "It's lower than that, guess again:"
   else
-    LOWER_BOUND=$GUESS
-    if [[ $((SECRET_NUMBER - GUESS)) -le 10 ]]; then
-      echo "You're very close! Try a slightly higher number:"
-    else
-      echo "It's higher than that, guess again (Try between $LOWER_BOUND and $UPPER_BOUND):"
-    fi
+    echo "It's higher than that, guess again:"
   fi
 done
